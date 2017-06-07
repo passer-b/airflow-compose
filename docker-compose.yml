@@ -1,0 +1,30 @@
+version: '3'
+
+services:
+  webserver:
+    image: passant/airflow:latest
+    volume:
+      - "./webserver/home:/airflow"
+    network:
+      - backend
+  scheduler:
+    image: passant/airflow:latest
+    volume:
+      - "./scheduler/home:/airflow"
+    network:
+      - backend
+  postgres:
+    image: postgres:9.6-alpine
+    volume:
+      - postgres/data:/var/lib/pgsql
+    network:
+      - backend
+  redis:
+    image: redis:3.2-alpine
+    volume:
+      - redis/data:/redis
+    network:
+      - backend
+
+networks:
+  backend:
