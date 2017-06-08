@@ -2,28 +2,44 @@ version: '3'
 
 services:
   webserver:
-    image: passant/airflow:latest
-    volume:
-      - "./webserver/home:/airflow"
-    network:
+    build:
+      context:    ./webserver/build
+      dockerfile: Dockerfile
+    command: airflow webserver
+    environment:
+      AIRFLOW_HOME: "/airflow"
+    volumes:
+      - "./webserver/data:/airflow"
+    ports:
+      - 18080:8080
+    networks:
       - backend
   scheduler:
-    image: passant/airflow:latest
-    volume:
-      - "./scheduler/home:/airflow"
-    network:
+    build:
+      context:    ./scheduler/build
+      dockerfile: Dockerfile
+    command: airflow scheduler
+    environment:
+      AIRFLOW_HOME: "/airflow"
+    volumes:
+      - "./scheduler/data:/airflow"
+    networks:
       - backend
   postgres:
     image: postgres:9.6-alpine
-    volume:
-      - postgres/data:/var/lib/pgsql
-    network:
+    environment:
+      POSTGRES_USER:     "airflow"
+      POSTGRES_PASSWORD: "airflow" # override in docker-compose.override.yml
+      POSTGRES_DB:       "airflow"
+    volumes:
+      - "./postgres/data:/var/lib/postgresql/data"
+    networks:
       - backend
   redis:
     image: redis:3.2-alpine
-    volume:
-      - redis/data:/redis
-    network:
+    volumes:
+      - "./redis/data:/data"
+    networks:
       - backend
 
 networks:
