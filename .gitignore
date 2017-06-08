@@ -1,0 +1,14 @@
+# ignore system files
+.DS_Store
+
+# ignore data dirs
+/webserver/data
+/scheduler/data
+/postgre/data
+/redis/data
+
+# ignore override setting file
+docker-compose.override.yml
+
+# don't ignore .gitkeep
+!.gitkeep
