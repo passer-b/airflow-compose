@@ -14,6 +14,9 @@ services:
       - 18080:8080
     networks:
       - backend
+    depends_on:
+      - postgres
+      - redis
   scheduler:
     build:
       context:    ./scheduler/build
@@ -25,6 +28,9 @@ services:
       - "./scheduler/data:/airflow"
     networks:
       - backend
+    depends_on:
+      - postgres
+      - redis
   postgres:
     image: postgres:9.6-alpine
     environment:
