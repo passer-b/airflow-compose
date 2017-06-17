@@ -3,13 +3,13 @@ version: '3'
 services:
   webserver:
     build:
-      context:    ./webserver/build
+      context:    ./airflow/build
       dockerfile: Dockerfile
     command: airflow webserver
     environment:
       AIRFLOW_HOME: "/airflow"
     volumes:
-      - "./webserver/data:/airflow"
+      - "./airflow/data:/airflow"
     ports:
       - 18080:8080
     networks:
@@ -19,13 +19,13 @@ services:
       - redis
   scheduler:
     build:
-      context:    ./scheduler/build
+      context:    ./airflow/build
       dockerfile: Dockerfile
     command: airflow scheduler
     environment:
       AIRFLOW_HOME: "/airflow"
     volumes:
-      - "./scheduler/data:/airflow"
+      - "./airflow/data:/airflow"
     networks:
       - backend
     depends_on:

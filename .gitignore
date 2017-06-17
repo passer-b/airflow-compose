@@ -2,8 +2,7 @@
 .DS_Store
 
 # ignore data dirs
-/webserver/data/*
-/scheduler/data/*
+/airflow/data/*
 /postgres/data/*
 /redis/data/*
 
@@ -14,5 +13,4 @@ docker-compose.override.yml
 !.gitkeep
 
 # don't ignore sample config
-!/webserver/data/airflow.cfg.sample
-!/scheduler/data/airflow.cfg.sample
+!/airflow/data/airflow.cfg.sample
