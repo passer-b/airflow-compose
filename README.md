@@ -3,7 +3,11 @@
 ### usage
 
 ``` bash
-docker-compose up -d
+cp airflow/data/sirflow.cfg.sample airflow/data/sirflow.cfg
+docker-compose up -d postgres redis
+docker-compose up -d scheduler
+docker-compose up -d webserver
+open http://localhost:18080
 ```
 
 ### composition
