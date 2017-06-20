@@ -1,0 +1,10 @@
+#!/bin/bash
+
+script_dir=$(cd $(dirname $BASH_SOURCE); pwd)
+
+set -ex
+
+docker-compose down
+
+rm -rf ${script_dir}/../postgres/data/*
+rm -rf ${script_dir}/../redis/data/*
