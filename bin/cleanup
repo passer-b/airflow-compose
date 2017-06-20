@@ -2,9 +2,24 @@
 
 script_dir=$(cd $(dirname $BASH_SOURCE); pwd)
 
-set -ex
+echo '//=============================='
+echo '// cleanup containers and networks'
+echo ''
 
 docker-compose down
 
+echo ''
+echo '//=============================='
+echo '// cleanup postgres data dir'
+echo ''
+
+test -n "$(ls ${script_dir}/../postgres/data)" && find ${script_dir}/../postgres/data/*
 rm -rf ${script_dir}/../postgres/data/*
+
+echo ''
+echo '//=============================='
+echo '// cleanup redis data dir'
+echo ''
+
+test -n "$(ls ${script_dir}/../postgres/data)" && find ${script_dir}/../redis/data/*
 rm -rf ${script_dir}/../redis/data/*
