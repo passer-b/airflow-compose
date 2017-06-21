@@ -26,6 +26,7 @@ services:
       AIRFLOW_HOME: "/airflow"
     volumes:
       - "./airflow/data:/airflow"
+      - "/var/run/docker.sock:/var/run/docker.sock"
     networks:
       - backend
     depends_on:
